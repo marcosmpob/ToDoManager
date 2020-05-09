@@ -11,6 +11,7 @@ import {
     Alert,
 } from 'react-native';
 import { signInOnFirebaseAsync } from '../services/FirebaseApi';
+import { CommonActions } from '@react-navigation/native';
 
 const img = require('../assets/TodoList.png');
 
@@ -25,6 +26,12 @@ const Login = props => {
             Alert.alert(
                 'User Authenticated',
                 'User ${user.email} has succesfuly been authenticated!',
+            );
+            props.navigation.dispatch(
+                CommonActions.reset({
+                    index: 0,
+                    routes: [{ name: 'TaskList' }],
+                }),
             );
         } catch (error) {
             Alert.alert('Login Failed', error.message);
