@@ -1,7 +1,6 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Image } from 'react-native';
-
 import { Login, Register, ToDoTasks, DoneTasks, App } from '../screens/Screens';
 import React from 'react';
 
