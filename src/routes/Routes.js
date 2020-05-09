@@ -1,7 +1,8 @@
 import { createStackNavigator } from '@react-navigation/stack';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { Image } from 'react-native';
-import { Login, Register, ToDoTasks, DoneTasks } from '../screens/Screens';
+
+import { Login, Register, ToDoTasks, DoneTasks, App } from '../screens/Screens';
 import React from 'react';
 
 const Stack = createStackNavigator();
@@ -24,6 +25,7 @@ export const TaskTab = () => {
 const Routes = () => {
     return (
         <Stack.Navigator headerMode="screen">
+            <Stack.Screen name="App" component={App} options={{ headerShown: false }} />
             <Stack.Screen
                 name="Login"
                 component={Login}
@@ -34,5 +36,4 @@ const Routes = () => {
         </Stack.Navigator>
     );
 };
-
-export default Routes
+export default Routes;

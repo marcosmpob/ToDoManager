@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import {
-    SafeAreaView,
     KeyboardAvoidingView,
     StyleSheet,
     View,
@@ -25,7 +24,7 @@ const Login = props => {
             const user = await signInOnFirebaseAsync(email, password);
             Alert.alert(
                 'User Authenticated',
-                'User ${user.email} has succesfuly been authenticated!',
+                `User ${email} has succesfuly been authenticated!`,
             );
             props.navigation.dispatch(
                 CommonActions.reset({
@@ -59,12 +58,6 @@ const Login = props => {
                     value={password}
                     onChangeText={password => setPassword(password)}
                 />
-                {/* <Button
-                        title="Sign In"
-                        onPress={() =>
-                        Alert.alert(`Email: ${email} \nPassword: ${password}`)
-                        }
-                        /> */}
                 <Button title="Sign In"
                     onPress={() => signInAsync()} />
                 <View style={styles.textConteiner}>
@@ -76,7 +69,6 @@ const Login = props => {
                         }}>
                         Register
                         </Text>
-                    {/* <Text style={styles.textRegister}>Register</Text> */}
                 </View>
             </View>
         </KeyboardAvoidingView>
