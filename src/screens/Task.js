@@ -3,25 +3,35 @@ import { View, TextInput, Switch, Text, Button, StyleSheet } from 'react-native'
 import { writeTaskOnFirebaseAsync } from '../services/FirebaseApi';
 
 export default class Task extends Component {
+    static navigationOptions = {
+        title: 'Task'
+    }
+
     state = {
+        key: '',
         title: '',
         resume: '',
         priority: true,
         isDone: false
     };
 
-    async _saveTaskAsync() {
-        var task = {
-            title: this.state.title,
-            resume: this.state.resume,
-            priority: this.state.priority,
-            isDone: this.state.isDone,
-        };
+    constructor(props) {
+        //console.log(props.navigation);
+        
+        super(props);
+        
         try {
-            await writeTaskOnFirebaseAsync(task);
-            this.props.navigation.goBack();
+            //const task = this.props.navigation.state.params.task;
+            const { task } = this.props.route.params;
+            this.state = {
+                key: task.key,
+                title: task.title,
+                resume: task.resume,
+                priority: task.priority,
+                isDone: task.isDone
+            };
         } catch (error) {
-            Alert.alert('Erro Saving', error.message);
+            console.log('erro',error)
         }
     }
 
@@ -65,6 +75,22 @@ export default class Task extends Component {
                 />
             </View>
         );
+    }
+    
+    async _saveTaskAsync() {
+        var task = {
+            key: this.state.key,
+            title: this.state.title,
+            resume: this.state.resume,
+            priority: this.state.priority,
+            isDone: this.state.isDone,
+        };
+        try {
+            await writeTaskOnFirebaseAsync(task);
+            this.props.navigation.goBack();
+        } catch (error) {
+            Alert.alert('Erro Saving', error.message);
+        }
     }
 }
 
